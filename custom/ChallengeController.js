@@ -9,14 +9,14 @@ class ChallengeController {
 	}
 
 	createChallenge(p1, p2) {
-		const uid = createId(p1, p2);
+		const uid = this.createId(p1, p2);
 		if (this.challenges.findIndex((e) => e === uid) !== -1) {
 			return false;
 		}
 
 		console.log("Challenge Created");
 		this.challenges.push(uid);
-		//const challenge = new Challenge(uid);
+		//const challenge = new Challenge(uid, type);
 		//this.challenges.push(challenge);
 
 		return true;
@@ -24,7 +24,7 @@ class ChallengeController {
 
 	deleteChallenge(uid) {
 		const idx = this.challenges.findIndex((e) => e === uid);
-		if (idx !== -1) {
+		if (idx === -1) {
 			return false;
 		}
 
@@ -41,3 +41,5 @@ class ChallengeController {
 	}
 
 }
+
+module.exports = ChallengeController;

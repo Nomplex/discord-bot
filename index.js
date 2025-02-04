@@ -2,20 +2,17 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { Client, Collection, Events, GatewayIntentBits } = require("discord.js");
 const DabloonBank = require("./custom/DabloonBank");
+const ChallengeController = require("./custom/ChallengeController");
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildInvites, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.GuildMessages] });
 
 client.dabloon = new DabloonBank();
+client.challenge = new ChallengeController();
 client.commands = new Collection();
 
-console.log(client.dabloon.getDabloons("nom"));
-console.log(client.dabloon.getDabloons("patrick"));
-
-console.log(client.dabloon.removeDabloons("patrick", 1001));
-console.log(client.dabloon.removeDabloons("patrick", 1000));
-console.log(client.dabloon.getDabloons("patrick"));
-console.log(client.dabloon.addDabloons("nom", 50000));
-console.log(client.dabloon.getDabloons("nom"));
+if (client.challenge.createChallenge("1", "2")) {
+	console.log(client.challenge.deleteChallenge("1-2"));
+}
 
 // Get all the commands from the commands directory and register them
 const foldersPath = path.join(__dirname, 'commands');
